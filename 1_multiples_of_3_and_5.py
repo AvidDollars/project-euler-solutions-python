@@ -24,4 +24,21 @@ def sum_of_multiples_2():
                num % 3 == 0 or num % 5 == 0)
 
 
-timer.run(repeats=5000)
+@timer.register()
+def sum_of_multiples_3():   # another optimization
+    three = sum(num for num in range(3, 1000, 3))
+    five = sum(num for num in range(5, 1000, 5))
+    fifteen = sum(num for num in range(15, 1000, 15))
+    return three + five - fifteen
+
+
+# RESULTS (timer.run(repeats=5000):
+#
+# 'sum_of_multiples':
+# 	elapsed time: 1.47s, repeats:  5000, result:  233168
+#
+# 'sum_of_multiples_2':
+# 	elapsed time: 0.974s, repeats:  5000, result:  233168
+#
+# 'sum_of_multiples_3':
+# 	elapsed time: 0.303s, repeats:  5000, result:  233168
