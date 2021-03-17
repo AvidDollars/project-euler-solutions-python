@@ -46,7 +46,7 @@ class timer:
         return inner
 
     @classmethod
-    def run(cls, repeats=5_000):
+    def run(cls, repeats=1_000):
         for fn, params in cls.registry.items():
             cls._timer(fn, repeats, *params)
 
@@ -64,4 +64,3 @@ class timer:
             print("result: ", result)
             print()
         return inner(arg)
-
