@@ -32,5 +32,28 @@ def generate_primes():
             num += next(increment)
 
 
+@timer.register(600851475143)
 def largest_prime_factor(num: int) -> int:
-    pass
+    prime_factors = []
+    g = generate_primes()
+    divisor = next(g)
+
+    while True:
+        if num % divisor == 0:
+            prime_factors.append(divisor)
+            num /= divisor
+            g = generate_primes()
+            if num == 1:
+                break
+        else:
+            divisor = next(g)
+
+    return max(prime_factors)
+
+
+timer.run(repeats=100, inject_results=True)
+
+### DON'T REMOVE IT ### 347ba36f45ecba341ae1513f16dd4532 ###
+#
+# 'largest_prime_factor':
+# 	elapsed time: 1.34s, repeats: 100, result: 6857
