@@ -5,3 +5,20 @@ By starting with 1 and 2, the first 10 terms will be: 1, 2, 3, 5, 8, 13, 21, 34,
 By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 find the sum of the even-valued terms.
 """
+
+from timer import timer
+from types import FunctionType
+
+
+@timer.register(4_000_000, lambda num: num if num % 2 == 0 else 0)
+def fibonacci_numbers(max_num: int, filter_: FunctionType):
+    first, second = 1, 2
+    summation = 0
+    while first < max_num:
+        summation += filter_(first)
+        summation += filter_(second)
+        first += second
+        second += first
+    return summation
+
+timer.run(repeats=100_000)
