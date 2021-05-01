@@ -9,6 +9,11 @@ import re
 
 
 class problem:
+    """
+    by invoking __repr__ method (eg. print(problem(10)) of instances of this class,
+    you can easily reach description of particular problem from projecteuler.net site
+    """
+
     # regex for extraction description from Euler site
     PROBLEM_DESCRIPTION_REGEX = re.compile(r'(?:<div class="problem_content".*?<p>)(.*?)(?:</div>)', flags=re.DOTALL)
     BASE_URL = "https://projecteuler.net"
