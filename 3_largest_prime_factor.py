@@ -38,13 +38,11 @@ def largest_prime_factor(num: int) -> int:
     g = generate_primes()
     divisor = next(g)
 
-    while True:
+    while num > 1:
         if num % divisor == 0:
             prime_factors.append(divisor)
             num /= divisor
             g = generate_primes()
-            if num == 1:
-                break
         else:
             divisor = next(g)
 
@@ -56,4 +54,4 @@ timer.run(repeats=100, inject_results=True)
 ### DON'T REMOVE IT ### 347ba36f45ecba341ae1513f16dd4532 ###
 #
 # 'largest_prime_factor':
-# 	elapsed time: 1.34s, repeats: 100, result: 6857
+# 	elapsed time: 1.33s, repeats: 100, result: 6857
