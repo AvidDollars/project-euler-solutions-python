@@ -11,8 +11,8 @@ from types import FunctionType
 
 
 @timer.register(4_000_000, lambda num: num if num % 2 == 0 else 0)
-def fibonacci_numbers(max_num: int, filter_: FunctionType):
-    first, second = 1, 2
+def fibonacci_numbers(max_num: int, filter_: FunctionType) -> int:
+    first, second = 2, 3
     summation = 0
     while first < max_num:
         summation += filter_(first)
@@ -21,4 +21,26 @@ def fibonacci_numbers(max_num: int, filter_: FunctionType):
         second += first
     return summation
 
-timer.run(repeats=100_000)
+
+@timer.register(4_000_000) # timewise it has on average the same performance as 'fibonacci_numbers'
+def fibonacci_numbers_two(max_num: int) -> int:
+
+    def yield_even_fib(max_num: int) -> int:
+        first, second = 2, 3
+        while first < max_num:
+            yield first
+            first += second
+            yield second
+            second += first
+
+    return sum(fib_num for idx, fib_num in enumerate(yield_even_fib(max_num)) if idx % 3 == 0)
+
+
+timer.run(repeats=10_000, inject_results=True)
+
+### DON'T REMOVE IT ### ccb7252550a0e00e26edb5d29f96d116 ###
+#
+# 'fibonacci_numbers':
+# 	elapsed time: 0.132s, repeats: 10000, result: 4613732
+# 'fibonacci_numbers_two':
+# 	elapsed time: 0.133s, repeats: 10000, result: 4613732
