@@ -22,6 +22,7 @@ def generate_primes():
 
     # ↓↓↓ yields calculated prime numbers
     while True:
+        # ↓↓↓ 'for else' construct → else clause is executed only if for loop is exited without break
         for d in range(2, floor(sqrt(num)) + 1):
             if num % d == 0:
                 num += next(increment)
