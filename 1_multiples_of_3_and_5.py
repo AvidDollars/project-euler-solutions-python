@@ -18,8 +18,8 @@ def sum_of_multiples(rng=(1, 1000), multiples=(3, 5)):
     return final_sum
 
 
-@timer.register()       # optimized function, runs faster
-def sum_of_multiples_2():
+@timer.register()
+def sum_of_multiples_2():   # optimized function, runs faster
     return sum(num for num in range(1, 1000) if
                num % 3 == 0 or num % 5 == 0)
 
@@ -32,13 +32,14 @@ def sum_of_multiples_3():   # another optimization
     return three + five - fifteen
 
 
-# RESULTS (timer.run(repeats=5000):
+timer.run(repeats=10_000, inject_results=True)
+
+
+### DON'T REMOVE IT ### 0d7eaf6da2897188d0661c8bada15ae4 ###
 #
 # 'sum_of_multiples':
-# 	elapsed time: 1.47s, repeats:  5000, result:  233168
-#
+# 	elapsed time: 3.0s, repeats: 10000, result: 233168
 # 'sum_of_multiples_2':
-# 	elapsed time: 0.974s, repeats:  5000, result:  233168
-#
+# 	elapsed time: 2.1s, repeats: 10000, result: 233168
 # 'sum_of_multiples_3':
-# 	elapsed time: 0.303s, repeats:  5000, result:  233168
+# 	elapsed time: 0.627s, repeats: 10000, result: 233168
